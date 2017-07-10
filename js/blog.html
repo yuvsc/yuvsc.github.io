@@ -1,0 +1,24 @@
+---
+layout: page
+title: Welcome to Yuval's Blog!
+permalink: /blog/
+---
+
+<!--<h4><a href="{{ "/feed.xml" | prepend: site.baseurl }}">Subscribe via RSS</a></h4> FIX LATER-->
+<div class="panel panel-default">
+  <!-- <header class="panel-heading">
+    <h1 class="panel-title">{{ page.title }}</h1>
+  </header> -->
+  <div class="panel-heading">
+    <h1 class="panel-title">All Posts</h1>
+  </div>
+  <ul class="list-group">
+  {% for post in site.posts %}
+    <li class="list-group-item">
+      <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+      <p class="text-muted">{{ post.date | date: "%b %-d, %Y" }}</p>
+      <p>{{ post.excerpt }}</p>
+    </li>
+  {% endfor %}
+  </ul>
+</div>

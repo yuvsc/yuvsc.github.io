@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Creating your Jekyll blog</title>
+  <meta name="description" content="See this on Github">
+
+  <script type="text/javascript" src="/js/jquery-2.2.2.min.js"></script>
+  <script type="text/javascript" src="/bootstrap-sass-3.3.6/assets/javascripts/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/2017/07/09/creating-jeykll-blog.html">
+  <link rel="alternate" type="application/rss+xml" title="Yuval Schaal" href="http://localhost:4000/feed.xml">
+</head>
+
+
+  <body class="flex-col">
+
+    <nav class="navbar navbar-default navbar-static-top">
+
+  <div class="container">
+
+    <!-- Uncomment when there's too many pages for mobile -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Yuval Schaal</a>
+    </div> -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        
+          
+          <li><a class="page-link" href="/blog/">Welcome to Yuval's Blog!</a></li>
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div> -->
+
+    <a class="navbar-brand" href="/">Yuval Schaal</a>
+    <ul class="nav navbar-nav pull-right">
+      <!--
+        
+          
+          <li><a class="page-link" href="/blog/">Welcome to Yuval's Blog!</a></li>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      -->
+      <li><a class="page-link" href="/blog/">Blog</a></li>
+    </ul>
+
+  </div>
+
+</nav>
+
+
+    <div class="container flex-item-1">
+      <article itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header>
+    <h1 itemprop="name headline">Creating your Jekyll blog</h1>
+    <p class="text-muted">
+      <p><a href="/feed.xml">Subscribe via RSS</a></p>
+      <time datetime="2017-07-09T00:00:00-04:00" itemprop="datePublished">
+        Jul 9, 2017
+      </time>
+      
+    </p>
+  </header>
+
+  <hr />
+
+  <div itemprop="articleBody">
+    <p><a href="https://github.com/yuvsc/yuvsc.github.io">See this on Github</a></p>
+
+<p>Hello, and welcome to my blog!
+In this first post, I am writing about how and why I set up this blog. This includes links to reviews on Jekyll blogs in general, and how or why they can benefit you.</p>
+
+<hr />
+
+<h2 id="idea">Idea</h2>
+
+<p>I wanted to have a way to document and share my projects. As I began to look into the different ways to do this, I realized that I wanted something that was simple, but also for me to be able to have full controll over how it all worked. So I ran into <a href="https://jekyllrb.com/">Jekyll</a>, a blog-aware static site generator.</p>
+
+<hr />
+
+<h2 id="execution">Execution</h2>
+
+<p>Getting right into it, super excited to relive the projects I have previously done and document them, I started out with the Jekyll installation <a href="https://jekyllrb.com/docs/installation/#requirements">requirements</a>, then the <a href="https://jekyllrb.com/docs/quickstart/">quick start guide</a>, as well as a <a href="https://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/#lets-try-it-out">starting point</a>.</p>
+
+<p>As I continued to learn about <a href="http://jekyllrb.com/docs/usage/">jekyll usage</a> and how it all works, I discovered that this is really awesome and simple. Here are some of the reasons why:</p>
+<ul>
+  <li>Jekyll posts can be written in any language. This one, for example, is written in markdown.</li>
+  <li>Jekyll doesn’t need a backend. It is a static site generator that uses layouts and pre-processed CSS for Jeykyll to make a web page.</li>
+  <li>Jekyll is simply integratable with GitHub pages. Since GitHub Pages are powered by Jekyll, you can easily deploy your site using GitHub for free. All you have to do is upload your Jekyll project, and it will run the site generator for you.</li>
+</ul>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p>Jekyll is a super easy to set up static site generator, which you can host your static site on GitHub. So for anyone just looking to set all of this up quickly (aka future me), these should be the steps that will get you there:</p>
+
+<p>First make sure you have these requirements:</p>
+<ul>
+  <li>GNU/Linux, Unix, or macOS</li>
+  <li>Ruby version 2.1 or above, including all development headers</li>
+  <li>RubyGems</li>
+  <li>GCC and Make</li>
+</ul>
+
+<p>Then install Jekyll</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>gem install jekyll bundler
+</code></pre>
+</div>
+
+<p>Create a new Jekyll site at ./myblog</p>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>jekyll new myblog
+</code></pre>
+</div>
+
+<p>Change into your new directory</p>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>myblog
+</code></pre>
+</div>
+
+<p>Build the site on the preview server</p>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+
+<span class="c"># or if you want it to track your changes use</span>
+jekyll serve --force_polling
+</code></pre>
+</div>
+
+<p>Now you can see your site on <a href="http://localhost:4000">http://localhost:4000</a></p>
+
+<p>Goodluck and enjoy!</p>
+
+  </div>
+
+</article>
+
+    </div>
+
+    <footer class="footer top-buffer">
+
+  <p class="text-center text-muted">
+    &copy; Yuval Schaal
+  </p>
+
+</footer>
+
+
+  </body>
+
+</html>

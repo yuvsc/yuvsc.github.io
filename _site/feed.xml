@@ -1,0 +1,89 @@
+<!-- see here to fix rss feed: http://joelglovier.com/writing/rss-for-jekyll -->
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yuval Schaal</title>
+    <description></description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 09 Jul 2017 23:56:20 -0400</pubDate>
+    <lastBuildDate>Sun, 09 Jul 2017 23:56:20 -0400</lastBuildDate>
+    <generator>Jekyll v3.5.0</generator>
+    
+      <item>
+        <title>Creating your Jekyll blog</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://github.com/yuvsc/yuvsc.github.io&quot;&gt;See this on Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Hello, and welcome to my blog!
+In this first post, I am writing about how and why I set up this blog. This includes links to reviews on Jekyll blogs in general, and how or why they can benefit you.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;idea&quot;&gt;Idea&lt;/h2&gt;
+
+&lt;p&gt;I wanted to have a way to document and share my projects. As I began to look into the different ways to do this, I realized that I wanted something that was simple, but also for me to be able to have full controll over how it all worked. So I ran into &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, a blog-aware static site generator.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;execution&quot;&gt;Execution&lt;/h2&gt;
+
+&lt;p&gt;Getting right into it, super excited to relive the projects I have previously done and document them, I started out with the Jekyll installation &lt;a href=&quot;https://jekyllrb.com/docs/installation/#requirements&quot;&gt;requirements&lt;/a&gt;, then the &lt;a href=&quot;https://jekyllrb.com/docs/quickstart/&quot;&gt;quick start guide&lt;/a&gt;, as well as a &lt;a href=&quot;https://www.smashingmagazine.com/2014/08/build-blog-jekyll-github-pages/#lets-try-it-out&quot;&gt;starting point&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As I continued to learn about &lt;a href=&quot;http://jekyllrb.com/docs/usage/&quot;&gt;jekyll usage&lt;/a&gt; and how it all works, I discovered that this is really awesome and simple. Here are some of the reasons why:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jekyll posts can be written in any language. This one, for example, is written in markdown.&lt;/li&gt;
+  &lt;li&gt;Jekyll doesn’t need a backend. It is a static site generator that uses layouts and pre-processed CSS for Jeykyll to make a web page.&lt;/li&gt;
+  &lt;li&gt;Jekyll is simply integratable with GitHub pages. Since GitHub Pages are powered by Jekyll, you can easily deploy your site using GitHub for free. All you have to do is upload your Jekyll project, and it will run the site generator for you.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Jekyll is a super easy to set up static site generator, which you can host your static site on GitHub. So for anyone just looking to set all of this up quickly (aka future me), these should be the steps that will get you there:&lt;/p&gt;
+
+&lt;p&gt;First make sure you have these requirements:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;GNU/Linux, Unix, or macOS&lt;/li&gt;
+  &lt;li&gt;Ruby version 2.1 or above, including all development headers&lt;/li&gt;
+  &lt;li&gt;RubyGems&lt;/li&gt;
+  &lt;li&gt;GCC and Make&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then install Jekyll&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll bundler
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a new Jekyll site at ./myblog&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll new myblog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Change into your new directory&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;myblog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Build the site on the preview server&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+
+&lt;span class=&quot;c&quot;&gt;# or if you want it to track your changes use&lt;/span&gt;
+jekyll serve --force_polling
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now you can see your site on &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Goodluck and enjoy!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Jul 2017 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/07/09/creating-jeykll-blog.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/09/creating-jeykll-blog.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,16 @@
+/*******************************************************************************
+Sticky footer
+*******************************************************************************/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  min-height: 100vh;
+}
+.footer {
+  width: 100%;
+  padding: 15px 0;
+  background-color: $navbar-default-bg;
+  border-top: 1px solid $navbar-default-border;
+}

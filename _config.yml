@@ -1,0 +1,27 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Yuval Schaal
+email: yuval.schaal@gmail.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://yuvsc.github.io" # the base hostname & protocol for your site
+linkedin_username: in/yuval-schaal-072a41a4
+github_username:  yuvsc
+bootstrap: /bootstrap-sass-3.3.6
+font-awesome: /font-awesome-4.5.0
+
+# Build settings
+markdown: kramdown
+
+# Workaround for my local jekyll version
+# https://github.com/jekyll/jekyll/issues/4427
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+exclude: [bootstrap-sass-3.3.6/CHANGELOG.md]
