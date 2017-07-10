@@ -15,6 +15,11 @@ github_username:  yuvsc
 bootstrap: /bootstrap-sass-3.3.6
 font-awesome: /font-awesome-4.5.0
 
+# Feed settings
+name:         Yuval's Blog
+description:  Documentation and sharing of projects
+url:          http://yuvsc.github.io/blog
+
 # Build settings
 markdown: kramdown
 
@@ -25,3 +30,5 @@ kramdown:
   hard_wrap: false
 
 exclude: [bootstrap-sass-3.3.6/CHANGELOG.md]
+
+future: true
