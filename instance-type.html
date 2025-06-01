@@ -115,7 +115,7 @@
                 // Sign the request
                 const signedRequest = await signer.sign(request);
                 
-                statusDiv.innerHTML = '<div class="loading">Fetching data...</div>';
+                statusDiv.innerHTML = '<div class="loading">Fetching data... This takes about 33 seconds :)</div>';
 
                 // Make the signed request
                 const response = await fetch(lambdaUrl, {
