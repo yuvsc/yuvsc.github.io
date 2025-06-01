@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Lambda with Cognito Auth</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        details {
+            cursor: pointer;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .error {
+            color: red;
+            padding: 10px;
+            background-color: #ffe6e6;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .loading {
+            color: blue;
+            padding: 10px;
+            background-color: #e6f3ff;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>AWS Lambda Data with Cognito Authentication</h1>
+    <div id="status"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Instance Type</th>
+                <th>vCPU</th>
+                <th>Memory</th>
+                <th>Price</th>
+                <th>Regions</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+
+    <script type="module">
+        import { SignatureV4 } from "https://cdn.jsdelivr.net/npm/@aws-sdk/signature-v4@3/+esm";
+        import { HttpRequest } from "https://cdn.jsdelivr.net/npm/@aws-sdk/protocol-http@3/+esm";
+        import { fromCognitoIdentityPool } from "https://cdn.jsdelivr.net/npm/@aws-sdk/credential-provider-cognito-identity@3/+esm";
+        import { Sha256 } from "https://cdn.jsdelivr.net/npm/@aws-crypto/sha256-js@5/+esm";
+
+        const region = "us-east-1";
+        const lambdaUrl = "https://hwjegvkp3o4urggoy2anh73zdq0xoliu.lambda-url.us-east-1.on.aws/";
+        
+        // Parse the URL properly
+        const url = new URL(lambdaUrl);
+        
+        async function fetchData() {
+            const statusDiv = document.getElementById("status");
+            const tbody = document.getElementById("table-body");
+            
+            try {
+                statusDiv.innerHTML = '<div class="loading">Authenticating with Cognito...</div>';
+                
+                // Initialize Cognito credentials
+                const credentials = fromCognitoIdentityPool({
+                    clientConfig: { region },
+                    identityPoolId: "us-east-1:78f3865c-854a-4541-b018-c2d32f2a927c",
+                });
+
+                statusDiv.innerHTML = '<div class="loading">Signing request...</div>';
+
+                // Create the HTTP request
+                const request = new HttpRequest({
+                    method: "GET",
+                    protocol: url.protocol,
+                    hostname: url.hostname,
+                    path: url.pathname,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "host": url.hostname,
+                        "content-type": "application/json"
+                    },
+                });
+
+                // Initialize the signer with proper hash function
+                const signer = new SignatureV4({
+                    service: "lambda",
+                    region: region,
+                    credentials: credentials,
+                    sha256: Sha256
+                });
+
+                // Sign the request
+                const signedRequest = await signer.sign(request);
+                
+                statusDiv.innerHTML = '<div class="loading">Fetching data...</div>';
+
+                // Make the signed request
+                const response = await fetch(lambdaUrl, {
+                    method: signedRequest.method,
+                    headers: signedRequest.headers,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                statusDiv.innerHTML = "";
+
+                // Populate the table
+                tbody.innerHTML = "";
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach((instance) => {
+                        const regionsList = instance.regions 
+                            ? instance.regions.map((r) => `<li>${r}</li>`).join("")
+                            : "<li>No regions available</li>";
+                        
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${instance.instanceType || 'N/A'}</td>
+                            <td>${instance.vcpu || 'N/A'}</td>
+                            <td>${instance.memory || 'N/A'}</td>
+                            <td>$${instance.price || 'N/A'}</td>
+                            <td>
+                                <details>
+                                    <summary>Show Regions</summary>
+                                    <ul>${regionsList}</ul>
+                                </details>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5">No data available</td></tr>';
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                statusDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                
+                // Show some debugging info
+                if (error.message.includes("403") || error.message.includes("401")) {
+                    statusDiv.innerHTML += '<div class="error">Authentication failed. Please check your Cognito Identity Pool configuration and permissions.</div>';
+                } else if (error.message.includes("CORS")) {
+                    statusDiv.innerHTML += '<div class="error">CORS error. Make sure your Lambda function URL allows cross-origin requests.</div>';
+                }
+            }
+        }
+
+        // Start the process when page loads
+        fetchData();
+    </script>
+</body>
+</html>
