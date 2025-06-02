@@ -54,12 +54,12 @@
         <thead>
             <tr>
                 <th>Instance Type</th>
+                <th>Region</th>
                 <th>vCPU</th>
                 <th>Memory</th>
-                <th>Price</th>
-                <th>Regions</th>
+                <th>Price (USD/hr)</th>
             </tr>
-        </thead>
+            </thead>
         <tbody id="table-body">
         </tbody>
     </table>
@@ -115,7 +115,7 @@
                 // Sign the request
                 const signedRequest = await signer.sign(request);
                 
-                statusDiv.innerHTML = '<div class="loading">Fetching data... This takes about 33 seconds :)</div>';
+                statusDiv.innerHTML = '<div class="loading">Fetching data...</div>';
 
                 // Make the signed request
                 const response = await fetch(lambdaUrl, {
@@ -132,27 +132,39 @@
 
                 // Populate the table
                 tbody.innerHTML = "";
+
                 if (Array.isArray(data) && data.length > 0) {
-                    data.forEach((instance) => {
-                        const regionsList = instance.regions 
-                            ? instance.regions.map((r) => `<li>${r}</li>`).join("")
-                            : "<li>No regions available</li>";
-                        
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-                            <td>${instance.instanceType || 'N/A'}</td>
-                            <td>${instance.vcpu || 'N/A'}</td>
-                            <td>${instance.memory || 'N/A'}</td>
-                            <td>$${instance.price || 'N/A'}</td>
-                            <td>
-                                <details>
-                                    <summary>Show Regions</summary>
-                                    <ul>${regionsList}</ul>
-                                </details>
-                            </td>
-                        `;
-                        tbody.appendChild(row);
+                    data.forEach((entry) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${entry.instanceType}</td>
+                        <td>${entry.region}</td>
+                        <td>${entry.vcpu}</td>
+                        <td>${entry.memory}</td>
+                        <td>$${entry.price}</td>
+                    `;
+                    tbody.appendChild(row);
                     });
+                    // data.forEach((instance) => {
+                    //     const regionsList = instance.regions 
+                    //         ? instance.regions.map((r) => `<li>${r}</li>`).join("")
+                    //         : "<li>No regions available</li>";
+                        
+                    //     const row = document.createElement("tr");
+                    //     row.innerHTML = `
+                    //         <td>${instance.instanceType || 'N/A'}</td>
+                    //         <td>${instance.vcpu || 'N/A'}</td>
+                    //         <td>${instance.memory || 'N/A'}</td>
+                    //         <td>$${instance.price || 'N/A'}</td>
+                    //         <td>
+                    //             <details>
+                    //                 <summary>Show Regions</summary>
+                    //                 <ul>${regionsList}</ul>
+                    //             </details>
+                    //         </td>
+                    //     `;
+                        // tbody.appendChild(row);
+                    // });
                 } else {
                     tbody.innerHTML = '<tr><td colspan="5">No data available</td></tr>';
                 }
@@ -172,6 +184,8 @@
 
         // Start the process when page loads
         fetchData();
+
+        
     </script>
 </body>
 </html>
